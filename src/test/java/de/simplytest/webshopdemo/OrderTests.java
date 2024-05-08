@@ -16,10 +16,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderTests extends BaseTests {
-    @BeforeEach
-    void clearSession() {
-        driver.manage().deleteAllCookies();
-    }
 
     @ParameterizedTest
     @MethodSource("provideScreenResolutions")
@@ -34,7 +30,7 @@ public class OrderTests extends BaseTests {
         assertThat(homePage.cartIsEmpty()).isTrue();
 
         CartPage cartPage = homePage.addProductToCart(Album.sku).viewCart();
-        cartPage.setQuantityOfProduct(Album.name, 2);
+        assertThat(cartPage.setQuantityOfProduct(Album.name, 2)).isEqualTo("Cart updated.");
 
         assertThat(cartPage.getTotalPrice()).isEqualTo("30,00 €");
     }
