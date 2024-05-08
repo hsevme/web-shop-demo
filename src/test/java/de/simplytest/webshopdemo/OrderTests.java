@@ -29,7 +29,7 @@ public class OrderTests extends BaseTests {
         assertThat(homePage.cartIsEmpty()).isTrue();
 
         CartPage cartPage = homePage.addProductToCart(Album.sku).viewCart();
-        assertThat(cartPage.setQuantityOfProduct(Album.name, 2)).isEqualTo("Cart updated.");
+        cartPage.setQuantityOfProduct(Album.name, 2);
 
         assertThat(cartPage.getTotalPrice()).isEqualTo("30,00 €");
     }

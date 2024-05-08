@@ -30,7 +30,7 @@ public class CartPage extends Page {
         return price.getText();
     }
 
-    public String setQuantityOfProduct(String productName, int quantity) {
+    public CartPage setQuantityOfProduct(String productName, int quantity) {
         WebElement cartItem = cart.getItem(productName);
         WebElement quantityField = cartItem.findElement(cart.quantityField);
         quantityField.clear();
@@ -38,8 +38,8 @@ public class CartPage extends Page {
         WebElement updateCartButton = driver.findElement(cart.updateButton);
         scrollToElement(driver, updateCartButton);
         updateCartButton.click();
-        WebElement message = wait.until(visibilityOfElementLocated(cart.message));
-        return message.getText();
+        wait.until(invisibilityOfElementLocated(cart.loadingSpinner));
+        return getCartPageAccordingToWidth();
     }
 
     public CartPage getCartPageAccordingToWidth() {

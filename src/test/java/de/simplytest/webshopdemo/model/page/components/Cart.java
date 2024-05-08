@@ -7,10 +7,10 @@ import org.openqa.selenium.WebElement;
 public class Cart extends BaseComponent {
     public By orderTotal = By.className("order-total");
     public By amount = By.className("amount");
-    public By message = By.className("woocommerce-message");
     public String itemTemplate = "//td[@class='product-name']/a[text()='%s']/../..";
     public By updateButton = By.cssSelector("button[name='update_cart']");
     public By quantityField = By.cssSelector("input[title='Qty']");
+    public By loadingSpinner = By.cssSelector("form.processing");
 
     public Cart(WebElement root) {
         super(root);

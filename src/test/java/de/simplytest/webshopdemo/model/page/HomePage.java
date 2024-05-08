@@ -40,10 +40,7 @@ public class HomePage extends Page {
     }
 
     public boolean cartIsEmpty() {
-        WebElement cart = driver.findElement(cartContentsLocator);
-        scrollToElement(driver, cart);
-        WebElement cartCount = cart.findElement(cartCountLocator);
-        scrollToElement(driver, cartCount);
+        WebElement cartCount = wait.until(visibilityOf(driver.findElement(cartContentsLocator).findElement(cartCountLocator)));
         return cartCount.getText().equals(String.format("0%s", cartCountSuffix));
     }
 
