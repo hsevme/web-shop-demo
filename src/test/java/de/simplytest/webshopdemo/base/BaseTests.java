@@ -1,6 +1,6 @@
 package de.simplytest.webshopdemo.base;
 
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.Dimension;
@@ -23,7 +23,7 @@ public class BaseTests {
         return new ChromeOptions();
     }
 
-    @AfterAll
+    @AfterEach
     void teardown() {
         driver.quit();
     }

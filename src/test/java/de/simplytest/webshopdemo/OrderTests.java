@@ -5,7 +5,6 @@ import de.simplytest.webshopdemo.model.domain.products.Album;
 import de.simplytest.webshopdemo.model.page.CartPage;
 import de.simplytest.webshopdemo.model.page.HomePage;
 import de.simplytest.webshopdemo.model.page.base.Page;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
