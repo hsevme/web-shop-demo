@@ -20,10 +20,6 @@ public class HomePage extends Page {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        if (!headline().equals("Shop")) {
-            throw new IllegalStateException("This is not the Home Page," +
-                    " current page is: " + driver.getCurrentUrl());
-        }
         product = new Product(driver.findElement(By.cssSelector("ul.products")));
     }
 
@@ -45,7 +41,6 @@ public class HomePage extends Page {
 
     public boolean cartIsEmpty() {
         WebElement cart = driver.findElement(cartContentsLocator);
-        // scrollToElement(driver, cart);
         WebElement cartCount = cart.findElement(cartCountLocator);
         scrollToElement(driver, cartCount);
         return cartCount.getText().equals(String.format("0%s", cartCountSuffix));

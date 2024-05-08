@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static de.simplytest.webshopdemo.actions.Scrolling.scrollToElement;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CartPage extends Page {
@@ -17,10 +16,6 @@ public class CartPage extends Page {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        if (!headline().equals("Cart")) {
-            throw new IllegalStateException("This is not the Cart Page," +
-                    " current page is: " + driver.getCurrentUrl());
-        }
         cart = new Cart(this.driver.findElement(By.className("woocommerce-cart")));
     }
 
@@ -29,17 +24,13 @@ public class CartPage extends Page {
         return getCartPageAccordingToWidth();
     }
 
-    public String headline() {
-        return wait.until(visibilityOfElementLocated(headlineLocator)).getText();
-    }
-
     public String getTotalPrice() {
         WebElement orderTotal = wait.until(visibilityOfElementLocated(cart.orderTotal));
         WebElement price = wait.until(visibilityOf(orderTotal.findElement(cart.amount)));
         return price.getText();
     }
 
-    public CartPage setQuantityOfProduct(String productName, int quantity) {
+    public String setQuantityOfProduct(String productName, int quantity) {
         WebElement cartItem = cart.getItem(productName);
         WebElement quantityField = cartItem.findElement(cart.quantityField);
         quantityField.clear();
@@ -48,8 +39,7 @@ public class CartPage extends Page {
         scrollToElement(driver, updateCartButton);
         updateCartButton.click();
         WebElement message = wait.until(visibilityOfElementLocated(cart.message));
-        assertThat(message.getText()).isEqualTo("Cart updated.");
-        return getCartPageAccordingToWidth();
+        return message.getText();
     }
 
     public CartPage getCartPageAccordingToWidth() {
